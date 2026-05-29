@@ -1,52 +1,97 @@
-# Ex02 Django ORM Web Application
-## Date: 3.05.2026
+# Ex01 Django ORM Web Application
+
+**Date:** 21/05/2025
+
+---
 
 ## AIM
-To develop a Django application to store and retrieve data from Car Inventory Database using Object Relational Mapping(ORM).
 
-## ENTITY RELATIONSHIP DIAGRAM
-<img width="1039" height="575" alt="image" src="https://github.com/user-attachments/assets/0d3f6e5b-df53-47ac-9cd5-8b86c2f3a259" />
+To develop a Django Application to store and retrieve data from an E-Commerce Website Database for Amazon or Flipkart using Object Relational Mapping (ORM).
 
+---
 
 ## DESIGN STEPS
 
-### STEP 1:
-Clone the problem from GitHub
+### STEP 1
+Clone the project from GitHub.
 
-### STEP 2:
-Create a new app in Django project
+### STEP 2
+Create a new app in the Django project.
 
-### STEP 3:
-Enter the code for admin.py and models.py
+### STEP 3
+Enter the code for `admin.py` and `models.py`.
 
-### STEP 4:
-Execute Django admin and create details for 10 books
+### STEP 4
+Detect changes and create migration files that describe how to modify the database schema.
 
-## PROGRAM
-```
-models.py
+### STEP 5
+Execute the migration files and update the database schema to match the Django models.
+
+### STEP 6
+Create a superuser with full access rights to all models and data through the admin interface.
+
+### STEP 7
+Apply the migration files of the created app to the database.
+
+### STEP 8
+Execute Django admin using localhost and create details for 10 entries.
+
+---
+
+# PROGRAM
+
+## models.py
+
+```python
 from django.db import models
-from django.contrib import admin
-class Movie(models.Model):
-    title = models.CharField(max_length=255, help_text="Movie Title")
-    director = models.CharField(max_length=100, help_text="Director Name")
-    release_date = models.DateField(help_text="Release Date")
-    genre = models.CharField(max_length=50, help_text="Movie Genre")
-    rating = models.DecimalField(max_digits=3, decimal_places=1, help_text="Movie Rating (e.g., 8.5)")
-    duration = models.IntegerField(help_text="Duration in Minutes")
 
-class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'director', 'release_date', 'genre', 'rating', 'duration')
-# Create your models here.
+class FoodOrder(models.Model):
+    Order_ID = models.IntegerField(primary_key=True)
+    CustomerName = models.CharField(max_length=50)
+    RestaurantName = models.CharField(max_length=50)
+    FoodItem = models.CharField(max_length=100)
+    Quantity = models.IntegerField()
+    Price = models.FloatField()
+    DeliveryAddress = models.CharField(max_length=200)
+    OrderStatus = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.CustomerName
 ```
 
+---
 
-## OUTPUT
+## admin.py
 
-<img width="1914" height="1107" alt="image" src="https://github.com/user-attachments/assets/7ed90cbf-6ac5-41ed-8e16-420d28238ec8" />
+```python
+from django.contrib import admin
+from .models import FoodOrder
+
+class FoodOrderAdmin(admin.ModelAdmin):
+    list_display = (
+        'Order_ID',
+        'CustomerName',
+        'RestaurantName',
+        'FoodItem',
+        'Quantity',
+        'Price',
+        'DeliveryAddress',
+        'OrderStatus'
+    )
+
+admin.site.register(FoodOrder, FoodOrderAdmin)
+```
+
+---
+
+# OUTPUT
+
+<img width="1027" height="497" alt="Screenshot 2026-05-21 103043" src="https://github.com/user-attachments/assets/d35567d6-d354-45c9-8af5-213d6d4ef33d" />
 
 
 
-## RESULT
-Thus the program for creating a database using ORM hass been executed successfully
+---
+
+# RESULT
+
+Thus, the program for creating an E-Commerce website database using Django ORM has been executed successfully.
